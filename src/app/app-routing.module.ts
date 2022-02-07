@@ -8,6 +8,11 @@ const routes: Routes = [
     component: DashboardComponent,
   },
   {
+    path: 'counter',
+    loadChildren: () =>
+      import('./features/counter/counter.module').then((m) => m.CounterModule),
+  },
+  {
     path: '**',
     redirectTo: 'dashboard',
   },
