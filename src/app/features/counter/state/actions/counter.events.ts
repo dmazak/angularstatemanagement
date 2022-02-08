@@ -1,4 +1,4 @@
-import { createAction } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 // Event actions often come from components. They are just saying "This happened".
 // Naming is a past-tense description of some event that happened.
 // usually come from components.
@@ -19,4 +19,11 @@ export const decrementClicked = createAction(
 
 export const counterFeatureInitialized = createAction(
   '[counter event] the counter feature started up, yo'
+);
+
+export const countReset = createAction('[counter event] count reset');
+
+export const countBySet = createAction(
+  '[counter event] count by set',
+  props<{ payload: number }>()
 );

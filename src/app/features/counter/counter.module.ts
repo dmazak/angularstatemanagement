@@ -7,6 +7,8 @@ import { CountUiComponent } from './components/count-ui/count-ui.component';
 import { CounterComponent } from './counter.component';
 import { featureName, reducers } from './state';
 import { CounterEffects } from './state/effects/counter.effects';
+import { CountResetComponent } from './components/count-reset/count-reset.component';
+import { CountByComponent } from './components/count-by/count-by.component';
 
 const routes: Routes = [
   {
@@ -16,7 +18,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [CounterComponent, CountUiComponent],
+  declarations: [CounterComponent, CountUiComponent, CountResetComponent, CountByComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

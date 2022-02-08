@@ -8,11 +8,11 @@ import {
 } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 import { map, tap } from 'rxjs';
-import { selectCountUiCurrent } from '..';
+import { selectCountUiBranch } from '..';
 import * as commands from '../actions/counter.commands';
 import * as documents from '../actions/counter.document';
 import * as events from '../actions/counter.events';
-import { CountUIState, initialState } from '../reducers/count-ui.reducer';
+import { CountUIState } from '../reducers/count-ui.reducer';
 @Injectable()
 export class CounterEffects implements OnInitEffects {
   ngrxOnInitEffects(): Action {
@@ -22,7 +22,24 @@ export class CounterEffects implements OnInitEffects {
   // Turn Events into Commands. "I" (the effect) decides what an event means, what has to happen when that event fires.
 
   // turn an event into a command
+
+  // what does it mean when a count is reset?
+
+  countBySet$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(events.countBySet),
+      map((a) => commands.setCountBy({ payload: a.payload }))
+    );
+  });
+
+  resetCount$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(events.countReset),
+      map(() => commands.resetCount())
+    );
+  });
   // events.counterFeatureInitialized => commands.loadCounterData()
+
   loadCounterData$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(events.counterFeatureInitialized),
@@ -53,11 +70,22 @@ export class CounterEffects implements OnInitEffects {
 
   // these do some work on commands
 
+  resetCountState$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(commands.resetCount),
+      map(() => documents.blankCounterState())
+    );
+  });
+
   saveCounterData$ = createEffect(
     () => {
       return this.actions$.pipe(
-        ofType(commands.saveCounterData),
-        concatLatestFrom(() => this.store.select(selectCountUiCurrent)),
+        ofType(
+          commands.saveCounterData,
+          documents.blankCounterState,
+          commands.setCountBy
+        ),
+        concatLatestFrom(() => this.store.select(selectCountUiBranch)),
         tap(
           (
             [_, model] // the discarded paramater (_) is the action that caused this to happen (saveCounterData), the model is what the select returns.
@@ -74,12 +102,12 @@ export class CounterEffects implements OnInitEffects {
       map(() => localStorage.getItem('counter')), // null | string
       map((stored: null | string) => {
         if (stored === null) {
-          return initialState; // we will say the document should be the initial state
+          return documents.blankCounterState(); // we will say the document should be the initial state
         } else {
-          return JSON.parse(stored) as CountUIState; // this should be what was stored
+          const payload = JSON.parse(stored) as CountUIState; // this should be what was stored
+          return documents.counterDocument({ payload });
         }
-      }), // CountUiState
-      map((payload) => documents.counterDocument({ payload })) // Dispatches it.
+      })
     );
   });
 

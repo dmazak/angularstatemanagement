@@ -16,7 +16,10 @@ export const reducers = {
 const selectFeature = createFeatureSelector<CounterState>(featureName);
 
 // 2. Create a selector per "branch" of our state.
-const selectCountUiBranch = createSelector(selectFeature, (f) => f.countUi);
+export const selectCountUiBranch = createSelector(
+  selectFeature,
+  (f) => f.countUi
+);
 
 // 3. (optional) Create any intermediate or "helper" selectors
 // 4.  create the selectors the components need.
@@ -29,6 +32,15 @@ export const selectCountUiCurrent = createSelector(
   getCountUiViewModel
 );
 
+export const selectResetDisabled = createSelector(
+  selectCountUiBranch,
+  (c) => c.current === 0
+);
+
+export const selectCountingBy = createSelector(
+  selectCountUiBranch,
+  (b) => b.by
+);
 // IF this is easier for you to understand and write, do it.
 // if some snooty code reviewer says something like "uhm, you should use an anonymous function"
 // Just say "I feel this is more intention revealing and it allows me to unit test this."

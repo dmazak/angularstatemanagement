@@ -11,3 +11,5 @@ export const decrementCounterCount = createAction(
 export const saveCounterData = createAction(
   '[counter command] save the counter data'
 );
+
+export const resetCount = createAction('[counter command]] reset count');
