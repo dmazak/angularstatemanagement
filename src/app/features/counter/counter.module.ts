@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CounterComponent } from './counter.component';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CountUiComponent } from './components/count-ui/count-ui.component';
-import { StoreModule } from '@ngrx/store';
-import { featureName, reducers } from './state';
 import { EffectsModule } from '@ngrx/effects';
-import { CounterEffects } from './state/effects/counter-effects';
+import { StoreModule } from '@ngrx/store';
+import { CountUiComponent } from './components/count-ui/count-ui.component';
+import { CounterComponent } from './counter.component';
+import { featureName, reducers } from './state';
+import { CounterEffects } from './state/effects/counter.effects';
 
 const routes: Routes = [
   {

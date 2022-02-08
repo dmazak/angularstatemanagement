@@ -25,5 +25,16 @@ const selectCountUiBranch = createSelector(selectFeature, (f) => f.countUi);
 
 export const selectCountUiCurrent = createSelector(
   selectCountUiBranch,
-  (b): CountUIViewModel => ({ current: b.current })
+  // (b:fromCountUi.CountUIState): CountUIViewModel => ({ current: b.current })
+  getCountUiViewModel
 );
+
+// IF this is easier for you to understand and write, do it.
+// if some snooty code reviewer says something like "uhm, you should use an anonymous function"
+// Just say "I feel this is more intention revealing and it allows me to unit test this."
+
+function getCountUiViewModel(vm: fromCountUi.CountUIState): CountUIViewModel {
+  return {
+    current: vm.current,
+  };
+}
