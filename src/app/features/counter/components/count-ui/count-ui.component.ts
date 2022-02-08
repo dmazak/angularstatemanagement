@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { CountUIViewModel } from '../../models';
 import { selectCountUiCurrent } from '../../state';
 import * as events from '../../state/actions/counter.events';
 
@@ -10,12 +11,12 @@ import * as events from '../../state/actions/counter.events';
   styleUrls: ['./count-ui.component.css'],
 })
 export class CountUiComponent implements OnInit {
-  current!: Observable<number>;
+  model$!: Observable<CountUIViewModel>;
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.current = this.store.select(selectCountUiCurrent);
+    this.model$ = this.store.select(selectCountUiCurrent);
   }
   increment() {
     this.store.dispatch(events.incrementClicked());

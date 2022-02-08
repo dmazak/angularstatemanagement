@@ -4,7 +4,9 @@ import { CounterComponent } from './counter.component';
 import { RouterModule, Routes } from '@angular/router';
 import { CountUiComponent } from './components/count-ui/count-ui.component';
 import { StoreModule } from '@ngrx/store';
-import { featureName, reducers } from '../state';
+import { featureName, reducers } from './state';
+import { EffectsModule } from '@ngrx/effects';
+import { CounterEffects } from './state/effects/counter-effects';
 
 const routes: Routes = [
   {
@@ -19,6 +21,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature(featureName, reducers),
+    EffectsModule.forFeature([CounterEffects]),
   ],
 })
 export class CounterModule {}

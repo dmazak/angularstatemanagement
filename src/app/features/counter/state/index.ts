@@ -1,5 +1,6 @@
 export const featureName = 'counterFeature';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { CountUIViewModel } from '../models';
 import * as fromCountUi from './reducers/count-ui.reducer';
 
 export interface CounterState {
@@ -24,5 +25,5 @@ const selectCountUiBranch = createSelector(selectFeature, (f) => f.countUi);
 
 export const selectCountUiCurrent = createSelector(
   selectCountUiBranch,
-  (b) => b.current
+  (b): CountUIViewModel => ({ current: b.current })
 );

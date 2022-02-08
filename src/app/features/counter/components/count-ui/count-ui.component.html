@@ -1,5 +1,7 @@
-<button (click)="decrement()"
-        class="btn btn-danger">-</button>
-<span>{{ current | async }}</span>
-<button (click)="increment()"
-        class="btn btn-success">+</button>
+<div *ngIf="model$ | async as model">
+  <button (click)="decrement()"
+          class="btn btn-danger">-</button>
+  <span>{{ model.current }}</span>
+  <button (click)="increment()"
+          class="btn btn-success">+</button>
+</div>
