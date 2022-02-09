@@ -1,1 +1,36 @@
-<p>jeffsplaylists works!</p>
+<header>
+  <h3>Playlists</h3>
+</header>
+<section class="row">
+  <nav class="col-3">
+    <ul class="nav nav-pills flex-column">
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          [routerLink]="['overview']"
+          [routerLinkActive]="['active']"
+          >Overview</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          [routerLink]="['list']"
+          [routerLinkActive]="['active']"
+          >Your Playlists</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          [routerLink]="['entry']"
+          [routerLinkActive]="['active']"
+          >Add A Song</a
+        >
+      </li>
+    </ul>
+  </nav>
+  <section class="col">
+    <router-outlet></router-outlet>
+  </section>
+</section>

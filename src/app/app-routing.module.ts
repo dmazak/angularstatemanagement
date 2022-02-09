@@ -14,9 +14,10 @@ const routes: Routes = [
   },
   {
     path: 'playlists',
-    loadChildren: () => import ('./features/jeffsplaylists/jeffsplaylists.module').then(
-      (m) => m.JeffsplaylistsModule
-    ),
+    loadChildren: () =>
+      import('./features/jeffsplaylists/jeffsplaylists.module').then(
+        (m) => m.JeffsplaylistsModule
+      ),
   },
   {
     path: '**',
