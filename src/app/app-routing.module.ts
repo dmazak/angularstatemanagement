@@ -13,6 +13,12 @@ const routes: Routes = [
       import('./features/counter/counter.module').then((m) => m.CounterModule),
   },
   {
+    path: 'playlists',
+    loadChildren: () => import ('./features/jeffsplaylists/jeffsplaylists.module').then(
+      (m) => m.JeffsplaylistsModule
+    ),
+  },
+  {
     path: '**',
     redirectTo: 'dashboard',
   },
