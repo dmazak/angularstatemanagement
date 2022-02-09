@@ -1,1 +1,24 @@
-<p>list works!</p>
+<ul class="list-unstyled" *ngIf="model$ | async as model">
+  <li class="card" *ngFor="let item of model">
+    <div class="card-header">{{ item.title }}</div>
+    <div class="card-body">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <b class="label-inline">Title</b><span>{{ item.title }}</span>
+        </li>
+        <li class="list-group-item">
+          <b class="label-inline">Artist</b
+          ><span>{{ item.artist || "Unknown" }}</span>
+        </li>
+        <li class="list-group-item">
+          <b class="label-inline">Album</b
+          ><span>{{ item.album || "Unknown" }}</span>
+        </li>
+        <li class="list-group-item">
+          <b class="label-inline">Year Released</b
+          ><span>{{ item.yearReleased || "Unknown" }}</span>
+        </li>
+      </ul>
+    </div>
+  </li>
+</ul>
