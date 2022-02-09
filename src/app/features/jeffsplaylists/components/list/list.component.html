@@ -22,3 +22,7 @@
     </div>
   </li>
 </ul>
+
+<div class="alert alert-info" *ngIf="(model$ | async)?.length === 0">
+  <h3>You Have No Songs!</h3>
+</div>

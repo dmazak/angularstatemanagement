@@ -9,6 +9,17 @@ import * as documents from '../actions/playlist.documents';
 export class ListEffects {
   // when we are told to load the list, we go to the service, ask it to get them, then return a Document.
 
+  saveAPlaylistItem$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(commands.savePlaylistItem),
+      mergeMap(({ payload }) =>
+        this.service
+          .addItem(payload)
+          .pipe(map((payload) => documents.playListItem({ payload })))
+      )
+    );
+  });
+
   loadThePlaylist$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(commands.loadThePlaylists),

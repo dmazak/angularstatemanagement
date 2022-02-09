@@ -1,1 +1,47 @@
-<p>entry works!</p>
+<form [formGroup]="form" (ngSubmit)="addSong(focusMe)">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input
+      #focusMe
+      type="text"
+      autofocus
+      id="title"
+      formControlName="title"
+      class="form-control"
+    />
+    <div
+      class="alert alert-danger"
+      *ngIf="title?.errors && (title?.touched || title?.dirty)"
+    >
+      <p>This is Required</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="artist">Artist</label>
+    <input
+      type="text"
+      id="artist"
+      formControlName="artist"
+      class="form-control"
+    />
+  </div>
+  <div class="form-group">
+    <label for="album">Album</label>
+    <input
+      type="text"
+      id="album"
+      formControlName="album"
+      class="form-control"
+    />
+  </div>
+  <div class="form-group">
+    <label for="yearReleased">Year Released</label>
+    <input
+      type="number"
+      id="yearReleased"
+      formControlName="yearReleased"
+      class="form-control"
+    />
+  </div>
+  <button type="submit" class="btn btn-primary">Add Song To Playlist</button>
+</form>
